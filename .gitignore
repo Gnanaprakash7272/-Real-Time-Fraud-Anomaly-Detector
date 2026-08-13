@@ -1,4 +1,4 @@
-﻿# Node
+# Node
 node_modules/
 frontend/node_modules/
 
@@ -14,7 +14,7 @@ __pycache__/
 venv/
 
 # Large datasets
-ml-service/data/*.csv
+ml-service/data/
 
 # Jupyter
 .ipynb_checkpoints/
