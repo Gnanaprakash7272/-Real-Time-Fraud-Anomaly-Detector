@@ -59,19 +59,7 @@ export default function VaultLogin() {
     }
   };
 
-  // Google OAuth Demo Handler
-  const handleGoogleAuth = async () => {
-    setIsSubmitting(true);
-    setFloatingError('');
-    try {
-      const res = await verifyCredentials('analyst', 'SecureVault@2025');
-      if (res.success) {
-        commitSession(res.data);
-      }
-    } catch {
-      setIsSubmitting(false);
-    }
-  };
+
 
   // Wrong credentials handler: Form Shake + 3 Red Blinks + Error Toast
   const triggerWrongCredentials = (msg) => {
@@ -153,13 +141,32 @@ export default function VaultLogin() {
           z-index: 1;
         }
 
-        /* SOFT DARK OVERLAY FOR READABILITY (rgba(10,20,22,0.45)) */
+        /* SOFT DARK OVERLAY FOR READABILITY WITH LIGHT BLUR & DIM FADE */
         .glass-vault-overlay {
           position: absolute;
           inset: 0;
-          background: rgba(10, 20, 22, 0.45);
+          background: rgba(8, 14, 16, 0.52);
+          backdrop-filter: blur(6px);
+          -webkit-backdrop-filter: blur(6px);
           pointer-events: none;
           z-index: 2;
+        }
+
+        /* CENTER SPOTLIGHT FADE & DEEP BLUR BACKDROP PARTICULARLY BEHIND LOGIN BOX */
+        .center-focus-backdrop-fade {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 580px;
+          height: 580px;
+          border-radius: 50%;
+          background: radial-gradient(circle at center, rgba(6, 10, 12, 0.95) 0%, rgba(8, 14, 16, 0.88) 45%, rgba(10, 16, 18, 0.5) 75%, transparent 100%);
+          backdrop-filter: blur(36px) saturate(190%);
+          -webkit-backdrop-filter: blur(36px) saturate(190%);
+          box-shadow: 0 0 100px rgba(0, 0, 0, 0.9);
+          pointer-events: none;
+          z-index: 5;
         }
 
         /* FLOATING ERROR TOAST */
@@ -210,23 +217,24 @@ export default function VaultLogin() {
           opacity: 1;
         }
 
-        /* GLASSMORPHIC LOGIN CARD */
+        /* GLASSMORPHIC LOGIN CARD WITH ULTRA DEEP CENTER BLUR & CRISP BORDER */
         .glassmorphic-vault-card {
           position: absolute;
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          width: 400px;
+          width: 410px;
           max-width: 90vw;
-          padding: 2.6rem 2.2rem;
-          border-radius: 22px;
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(20, 30, 32, 0.38) 100%);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          border: 1px solid ${isRedBlinking ? '#ef4444' : 'rgba(201, 161, 90, 0.35)'};
+          padding: 2.75rem 2.35rem;
+          border-radius: 24px;
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(15, 22, 24, 0.55) 100%);
+          backdrop-filter: blur(28px) saturate(200%);
+          -webkit-backdrop-filter: blur(28px) saturate(200%);
+          border: 1.5px solid ${isRedBlinking ? '#ef4444' : 'rgba(255, 215, 130, 0.5)'};
           box-shadow: 
-            0 8px 32px rgba(0, 0, 0, 0.4),
-            0 0 ${isRedBlinking ? '45px rgba(239, 68, 68, 0.85)' : '40px rgba(201, 161, 90, 0.12)'};
+            0 20px 50px rgba(0, 0, 0, 0.7),
+            inset 0 1px 2px rgba(255, 255, 255, 0.4),
+            0 0 ${isRedBlinking ? '50px rgba(239, 68, 68, 0.9)' : '45px rgba(255, 200, 100, 0.25)'};
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -263,15 +271,15 @@ export default function VaultLogin() {
           font-family: 'Cinzel', serif;
           font-size: 1.85rem;
           font-weight: 800;
-          color: ${isRedBlinking ? '#ef4444' : '#f0e6d2'};
-          text-shadow: 0 0 16px ${isRedBlinking ? 'rgba(239, 68, 68, 0.8)' : 'rgba(201, 161, 90, 0.3)'};
+          color: ${isRedBlinking ? '#ef4444' : '#ffe8b5'};
+          text-shadow: 0 0 20px ${isRedBlinking ? 'rgba(239, 68, 68, 0.9)' : 'rgba(255, 215, 130, 0.5)'};
           margin-top: 0;
           margin-bottom: 1.8rem;
           text-align: center;
           letter-spacing: 0.06em;
         }
 
-        /* INPUT FIELDS */
+        /* BRIGHTER INPUT FIELDS & COLUMNS */
         .glass-input-wrapper {
           position: relative;
           width: 100%;
@@ -280,28 +288,32 @@ export default function VaultLogin() {
 
         .glass-vault-input {
           width: 100%;
-          height: 48px;
-          padding: 0 2.6rem 0 1.1rem;
+          height: 50px;
+          padding: 0 2.8rem 0 1.2rem;
           box-sizing: border-box;
           border-radius: 14px;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid ${isRedBlinking ? '#ef4444' : 'rgba(201, 161, 90, 0.35)'};
-          box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
-          color: #f0e6d2;
+          background: rgba(255, 255, 255, 0.18);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1.5px solid ${isRedBlinking ? '#ef4444' : 'rgba(255, 225, 160, 0.85)'};
+          box-shadow: 0 0 16px rgba(255, 215, 130, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.25);
+          color: #ffffff;
           font-family: inherit;
-          font-size: 0.92rem;
+          font-size: 0.96rem;
+          font-weight: 600;
           outline: none;
-          transition: border-color 0.2s ease, box-shadow 0.2s ease;
+          transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
         }
 
         .glass-vault-input::placeholder {
-          color: #c9bfa8;
-          opacity: 0.7;
+          color: rgba(255, 255, 255, 0.82);
+          font-weight: 500;
         }
 
         .glass-vault-input:focus {
-          border-color: ${isRedBlinking ? '#ef4444' : '#c9a15a'};
-          box-shadow: 0 0 0 3px ${isRedBlinking ? 'rgba(239, 68, 68, 0.3)' : 'rgba(201, 161, 90, 0.25)'}, inset 0 2px 4px rgba(0, 0, 0, 0.3);
+          background: rgba(255, 255, 255, 0.28);
+          border-color: ${isRedBlinking ? '#ef4444' : '#ffe49e'};
+          box-shadow: 0 0 22px rgba(255, 215, 130, 0.55), 0 0 0 3.5px ${isRedBlinking ? 'rgba(239, 68, 68, 0.4)' : 'rgba(255, 215, 130, 0.35)'}, inset 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         /* Show/Hide Password Eye Toggle Icon in Muted Gold */
@@ -444,6 +456,9 @@ export default function VaultLogin() {
       <div className="vault-backdrop-image-wrapper" />
       <div className="glass-vault-overlay" />
 
+      {/* CENTER SPOTLIGHT FADE & DEEP BLUR BACKDROP PARTICULARLY BEHIND LOGIN BOX */}
+      <div className="center-focus-backdrop-fade" />
+
       {/* FLOATING ERROR TOAST */}
       {floatingError && (
         <div className="floating-error-toast" role="alert">
@@ -524,40 +539,6 @@ export default function VaultLogin() {
           </button>
         </form>
 
-        {/* Translucent Divider */}
-        <div className="divider-glass-container">
-          <div className="divider-line" />
-          <span className="divider-text">or continue with</span>
-          <div className="divider-line" />
-        </div>
-
-        {/* Sign in with Google Glass Button */}
-        <button
-          type="button"
-          className="glass-google-btn"
-          onClick={handleGoogleAuth}
-          disabled={isSubmitting}
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24">
-            <path
-              fill="#EA4335"
-              d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.4 9 5 12 5z"
-            />
-            <path
-              fill="#4285F4"
-              d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"
-            />
-            <path
-              fill="#FBBC05"
-              d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.3s.2-1.6.4-2.3L1.9 7.3C.7 9.7 0 10.8 0 12s.7 2.3 1.9 4.7l3.7-2.9z"
-            />
-            <path
-              fill="#34A853"
-              d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.4-6.4-5.2L1.9 16C3.7 19.7 7.5 23 12 23z"
-            />
-          </svg>
-          Sign in with Google
-        </button>
 
         {/* Footer Microcopy */}
         <div className="vault-footer-microcopy">

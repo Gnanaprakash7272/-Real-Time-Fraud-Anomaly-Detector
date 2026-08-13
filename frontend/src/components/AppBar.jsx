@@ -21,10 +21,10 @@ export default function AppBar({ isHealthy = true, onToggleSidebar }) {
       className="top-app-bar"
       style={{
         height: '70px',
-        backgroundColor: 'rgba(255, 255, 255, 0.85)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        borderBottom: '1px solid var(--border-color)',
+        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.22) 100%)',
+        backdropFilter: 'blur(20px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.65)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -32,7 +32,7 @@ export default function AppBar({ isHealthy = true, onToggleSidebar }) {
         position: 'sticky',
         top: 0,
         zIndex: 1000,
-        boxShadow: '0 1px 3px rgba(15, 23, 42, 0.05)'
+        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.08), inset 0 1px 2px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 2px 0 rgba(255, 255, 255, 0.3)'
       }}
     >
       {/* LEFT: Hamburger toggle + Branding */}

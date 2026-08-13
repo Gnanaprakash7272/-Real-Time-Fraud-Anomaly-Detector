@@ -59,7 +59,7 @@ export default function NavigationRail({ activeTab, setActiveTab, isOpen, onClos
         />
       )}
 
-      {/* SIDEBAR PANEL */}
+      {/* SIDEBAR PANEL — 3D GLASS & REAL MIRROR COLOUR STYLE */}
       <aside
         style={{
           position: 'fixed',
@@ -72,11 +72,11 @@ export default function NavigationRail({ activeTab, setActiveTab, isOpen, onClos
           transition: 'transform 0.32s cubic-bezier(0.16, 1, 0.3, 1)',
           display: 'flex',
           flexDirection: 'column',
-          background: 'linear-gradient(160deg, rgba(15,23,42,0.96) 0%, rgba(30,41,70,0.96) 100%)',
-          backdropFilter: 'blur(24px)',
-          WebkitBackdropFilter: 'blur(24px)',
-          borderRight: '1px solid rgba(201, 161, 90, 0.18)',
-          boxShadow: '4px 0 40px rgba(0,0,0,0.45), inset -1px 0 0 rgba(255,255,255,0.04)',
+          background: 'linear-gradient(160deg, rgba(255, 255, 255, 0.38) 0%, rgba(240, 245, 255, 0.22) 100%)',
+          backdropFilter: 'blur(28px) saturate(190%)',
+          WebkitBackdropFilter: 'blur(28px) saturate(190%)',
+          borderRight: '1.5px solid rgba(255, 255, 255, 0.65)',
+          boxShadow: '8px 0 32px 0 rgba(0, 0, 0, 0.22), inset 1px 1px 2px 0 rgba(255, 255, 255, 0.95), inset -1px 0 2px 0 rgba(255, 255, 255, 0.3)',
           overflow: 'hidden',
         }}
       >
@@ -92,7 +92,7 @@ export default function NavigationRail({ activeTab, setActiveTab, isOpen, onClos
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          borderBottom: '1px solid rgba(255,255,255,0.06)'
+          borderBottom: '1px solid rgba(255,255,255,0.4)'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
             <div style={{
@@ -106,10 +106,10 @@ export default function NavigationRail({ activeTab, setActiveTab, isOpen, onClos
               </svg>
             </div>
             <div>
-              <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#f0e6d2', letterSpacing: '0.04em' }}>
+              <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#0f172a', letterSpacing: '0.04em' }}>
                 FRAUD DETECTOR
               </div>
-              <div style={{ fontSize: '0.62rem', color: 'rgba(201,161,90,0.8)', fontWeight: '600', letterSpacing: '0.06em' }}>
+              <div style={{ fontSize: '0.62rem', color: '#4f46e5', fontWeight: '700', letterSpacing: '0.06em' }}>
                 SECURE VAULT SYSTEM
               </div>
             </div>
@@ -120,9 +120,9 @@ export default function NavigationRail({ activeTab, setActiveTab, isOpen, onClos
             onClick={onClose}
             style={{
               width: '32px', height: '32px', borderRadius: '8px',
-              border: '1px solid rgba(255,255,255,0.1)',
-              background: 'rgba(255,255,255,0.06)',
-              color: 'rgba(240,230,210,0.7)',
+              border: '1px solid rgba(255,255,255,0.5)',
+              background: 'rgba(255,255,255,0.4)',
+              color: '#334155',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               cursor: 'pointer',
               transition: 'all 0.15s ease'
@@ -131,12 +131,12 @@ export default function NavigationRail({ activeTab, setActiveTab, isOpen, onClos
             onMouseEnter={e => {
               e.currentTarget.style.background = 'rgba(220,38,38,0.2)';
               e.currentTarget.style.borderColor = 'rgba(220,38,38,0.4)';
-              e.currentTarget.style.color = '#fca5a5';
+              e.currentTarget.style.color = '#dc2626';
             }}
             onMouseLeave={e => {
-              e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-              e.currentTarget.style.color = 'rgba(240,230,210,0.7)';
+              e.currentTarget.style.background = 'rgba(255,255,255,0.4)';
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.5)';
+              e.currentTarget.style.color = '#334155';
             }}
           >
             <X size={16} />
@@ -147,7 +147,7 @@ export default function NavigationRail({ activeTab, setActiveTab, isOpen, onClos
         <div style={{
           padding: '1rem 1.25rem 0.5rem',
           fontSize: '0.62rem', fontWeight: '800',
-          color: 'rgba(201,161,90,0.6)',
+          color: '#475569',
           letterSpacing: '0.12em', textTransform: 'uppercase'
         }}>
           NAVIGATION
@@ -169,13 +169,13 @@ export default function NavigationRail({ activeTab, setActiveTab, isOpen, onClos
                   padding: '0.75rem 1rem',
                   borderRadius: '12px',
                   border: isActive
-                    ? '1px solid rgba(201,161,90,0.25)'
+                    ? '1px solid rgba(79,70,229,0.35)'
                     : '1px solid transparent',
                   background: isActive
                     ? 'linear-gradient(135deg, rgba(79,70,229,0.25), rgba(124,58,237,0.15))'
                     : 'transparent',
-                  color: isActive ? '#f0e6d2' : 'rgba(200,210,230,0.7)',
-                  fontWeight: isActive ? '700' : '500',
+                  color: isActive ? '#1e1b4b' : '#334155',
+                  fontWeight: isActive ? '800' : '600',
                   fontSize: '0.88rem',
                   cursor: 'pointer',
                   textAlign: 'left',
@@ -183,21 +183,21 @@ export default function NavigationRail({ activeTab, setActiveTab, isOpen, onClos
                   position: 'relative',
                   transition: 'all 0.18s ease',
                   letterSpacing: '0.01em',
-                  boxShadow: isActive ? '0 2px 12px rgba(79,70,229,0.2), inset 0 1px 0 rgba(255,255,255,0.05)' : 'none',
+                  boxShadow: isActive ? '0 4px 14px rgba(79,70,229,0.18), inset 0 1px 0 rgba(255,255,255,0.6)' : 'none',
                   opacity: isNavigable ? 1 : 0.65,
                 }}
                 title={isNavigable ? item.label : `${item.label} (coming soon)`}
                 onMouseEnter={e => {
                   if (!isActive) {
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
-                    e.currentTarget.style.color = '#f0e6d2';
-                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.5)';
+                    e.currentTarget.style.color = '#0f172a';
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.6)';
                   }
                 }}
                 onMouseLeave={e => {
                   if (!isActive) {
                     e.currentTarget.style.background = 'transparent';
-                    e.currentTarget.style.color = 'rgba(200,210,230,0.7)';
+                    e.currentTarget.style.color = '#334155';
                     e.currentTarget.style.borderColor = 'transparent';
                   }
                 }}
