@@ -1,0 +1,7 @@
+data/*
+!data/paysim_processed.csv
+notebooks/
+__pycache__/
+*.pyc
+.venv/
+.venv-*/

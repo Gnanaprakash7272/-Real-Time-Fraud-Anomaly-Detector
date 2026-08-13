@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-spring
+  labels:
+    app: backend-spring
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend-spring
+  template:
+    metadata:
+      labels:
+        app: backend-spring
+    spec:
+      containers:
+      - name: backend-spring
+        image: fraud-detector/backend-spring:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:postgresql://postgres:5432/fraud_detector"
+        - name: REDIS_HOST
+          value: "redis"
+        - name: KAFKA_BOOTSTRAP_SERVERS
+          value: "kafka:9092"
+        - name: ML_SERVICE_URL
+          value: "http://ml-service:8001"
+        resources:
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+          requests:
+            memory: "512Mi"
+            cpu: "250m"

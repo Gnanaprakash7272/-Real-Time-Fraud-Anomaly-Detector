@@ -1,0 +1,33 @@
+flowchart TD
+    subgraph Data Ingestion & Simulation Layer
+        A[Kafka Producer Simulation<br/>`infra/kafka-producer/producer.py`] -->|Kafka Event Stream| B[Apache Kafka Broker<br/>Topic: transactions-topic]
+    end
+
+    subgraph Backend Core Service [Spring Boot API - Port 8080]
+        B -->|@KafkaListener| C[KafkaConsumerService]
+        C --> D[TransactionService]
+        D <-->|ORM Persistence| E[(PostgreSQL DB<br/>`fraud_detector`)]
+        D <-->|Caching| F[(Redis Cache)]
+        D -->|REST POST /score| G[MLScoringClient]
+        C --> H[MetricsService<br/>Prometheus Real-Time TPS]
+    end
+
+    subgraph ML Microservice [Python FastAPI - Port 8001]
+        G -->|Raw Transaction| I[FastAPI Scoring Engine<br/>`ml-service/app/main.py`]
+        I --> J[Feature Preprocessing<br/>`preprocessing.py`]
+        J --> K[Ensemble Scoring Engine<br/>`scoring.py`]
+        
+        subgraph Ensemble ML Pipeline
+            K --> M1[Gradient Boosting Model<br/>60% Weight - Supervised]
+            K --> M2[Isolation Forest<br/>25% Weight - Anomaly Detection]
+            K --> M3[PyTorch Autoencoder<br/>15% Weight - Reconstruction MSE]
+        end
+        
+        K --> L[SHAP & Rule XAI Engine<br/>`explain.py`]
+        L -->|Risk Level, SHAP Impact & Natural Language Reasons| G
+    end
+
+    subgraph UI & Monitoring Layer
+        N[React + Vite Dashboard<br/>Port 3000] <-->|REST API| D
+        O[Grafana Latency Dashboard<br/>Port 3001] <-->|Prometheus Metrics| H
+    end
