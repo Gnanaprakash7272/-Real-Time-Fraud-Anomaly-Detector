@@ -19,6 +19,14 @@ SAMPLE_SIZE = 25000
 def main():
     os.makedirs(MODELS_DIR, exist_ok=True)
 
+    if not os.path.exists(DATA_PATH):
+        print(f"Data file not found at {DATA_PATH}.")
+        required = ["gradient_boost.pkl", "gb_model.pkl", "isolation_forest.pkl", "feature_cols.pkl"]
+        if all(os.path.exists(os.path.join(MODELS_DIR, f)) for f in required):
+            print("Pre-trained model artifacts exist in models/. Skipping bootstrap.")
+            return
+        raise FileNotFoundError(f"Neither dataset at {DATA_PATH} nor pre-trained models were found.")
+
     df = pd.read_csv(DATA_PATH)
     if len(df) > SAMPLE_SIZE:
         fraud = df[df["isFraud"] == 1]

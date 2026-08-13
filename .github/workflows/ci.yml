@@ -18,7 +18,9 @@ jobs:
           cache: maven
       - name: Compile backend
         working-directory: backend-spring
-        run: ./mvnw -B compile -DskipTests
+        run: |
+          chmod +x ./mvnw
+          ./mvnw -B compile -DskipTests
 
   frontend:
     runs-on: ubuntu-latest
